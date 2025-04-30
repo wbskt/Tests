@@ -1,15 +1,20 @@
-using System.Data;
-using System.Data.SqlClient;
-using System.Globalization;
+using System.Collections.Concurrent;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Moq;
 using Wbskt.Bdd.Tests.ContractWrappers;
+using Wbskt.Client;
 using Wbskt.Common.Contracts;
+using ChannelDetails = Wbskt.Common.Contracts.ChannelDetails;
+using ClientPayload = Wbskt.Common.Contracts.ClientPayload;
 
 namespace Wbskt.Bdd.Tests;
 
 public class MultiServerTests
 {
     private CoreServerClient _commonClient;
+    private ConcurrentBag<ChannelDetails> _channelDetails = [];
     private TestSource _testSource;
 
     [OneTimeSetUp]
@@ -68,8 +73,12 @@ public class MultiServerTests
         {
             tasks.AddRange(user.Channels.Where(c => !c.Fail).Select(channel => Task.Run(async () =>
             {
-                var result = await user.Client.CreateChannel(channel);
+                var result = await user.Client.CreateChannel(channel).ConfigureAwait(false);
                 Assert.That(result.IsSuccessStatusCode, Is.True);
+                Assert.That(result.Value.ChannelName, Is.EqualTo(channel.ChannelName));
+                Assert.That(result.Value.ChannelSecret, Is.EqualTo(channel.ChannelSecret));
+                channel.ChannelSubscriberId = result.Value.ChannelSubscriberId;
+                channel.ChannelPublisherId = result.Value.ChannelPublisherId;
             })));
         }
         await Task.WhenAll(tasks);
@@ -80,27 +89,96 @@ public class MultiServerTests
         {
             tasks.AddRange(user.Channels.Where(c => c.Fail).Select(channel => Task.Run(async () =>
             {
-                var result = await user.Client.CreateChannel(channel);
+                var result = await user.Client.CreateChannel(channel).ConfigureAwait(false);
                 Assert.That(result.IsSuccessStatusCode, Is.False);
             })));
         }
         await Task.WhenAll(tasks);
+        tasks.Clear();
+
+        // Positive
+        await Task.WhenAll(_testSource.Users.Where(u => !u.Fail).Select(user => Task.Run(async () =>
+        {
+            var result = await user.Client.GetAllChannels().ConfigureAwait(false);
+            Assert.That(result.IsSuccessStatusCode, Is.True);
+            Assert.That(result.Value, Has.Length.EqualTo(user.Channels.Count(c => !c.Fail)));
+            foreach (var channel in result.Value)
+            {
+                _channelDetails.Add(channel);
+            }
+        })));
+        await Task.WhenAll(tasks);
     }
 
-    // [OneTimeTearDown]
-    public void Cleanup()
+    [Test, Order(3)]
+    public async Task ClientConnectionTest()
     {
-        using var connection = new SqlConnection("#############################################");
-        connection.Open();
+        var channelDict = _channelDetails.ToDictionary(cd => cd.ChannelName, cd => cd);
+        foreach (var clientSource in _testSource.Clients)
+        {
+            clientSource.ChannelSubscriberId = channelDict.TryGetValue(clientSource.ChannelName, out var cd) ? cd.ChannelSubscriberId : Guid.NewGuid();
+            var wbsktConfigurationCustom = new WbsktConfigurationCustom
+            {
+                ChannelDetails = new Client.ChannelDetails
+                {
+                    Secret = clientSource.ChannelSecret,
+                    SubscriberId = clientSource.ChannelSubscriberId
+                },
+                ClientDetails = new ClientDetails
+                {
+                    Name = clientSource.ClientName,
+                    UniqueId = clientSource.ClientUniqueId
+                },
+                CoreServerAddress = new HostString("wbskt.com")
+            };
 
-        using var command = connection.CreateCommand();
-        command.CommandType = CommandType.Text;
-        command.CommandText = "DELETE FROM dbo.Channels";
-        command.ExecuteNonQuery();
+            var payload = _testSource.Users
+                .Where(u => !u.Fail)
+                .SelectMany(u => u.Channels)
+                .Where(c => !c.Fail)
+                .First(c => c.ChannelSubscriberId == clientSource.ChannelSubscriberId).Payloads
+                .ToList();
 
-        using var command2 = connection.CreateCommand();
-        command.CommandType = CommandType.Text;
-        command.CommandText = "DELETE FROM dbo.Users";
-        command.ExecuteNonQuery();
+            clientSource.Listener = new WbsktListener(wbsktConfigurationCustom, new Mock<ILogger<WbsktListener>>().Object);
+            clientSource.Listener!.ReceivedPayload += clientPayload =>
+            {
+                clientSource.ReceivedPayloads.Add(clientPayload.Data);
+                if (payload.Count == clientSource.ReceivedPayloads.Count)
+                {
+                    clientSource.CancellationToken.Cancel();
+                }
+            };
+        }
+
+        var listeningTask = Task.WhenAll(_testSource.Clients.Select(clientConn => Task.Run(async () =>
+        {
+            clientConn.CancellationToken.CancelAfter(2 * 60 * 1000);
+            await clientConn.Listener!.StartListening(clientConn.CancellationToken.Token).ConfigureAwait(false);
+        }))).ConfigureAwait(false);
+
+        await Task.Delay(10 * 1000);
+        foreach (var user in _testSource.Users.Where(u => !u.Fail))
+        {
+            foreach (var channel in user.Channels.Where(c => !c.Fail))
+            {
+                foreach (var payload in channel.Payloads)
+                {
+                    await user.Client.DispatchMessage(channel.ChannelPublisherId, new ClientPayload() { Data = payload });
+                }
+            }
+        }
+
+        await listeningTask;
+
+        foreach (var clientSource in _testSource.Clients)
+        {
+            var payload = _testSource.Users
+                .Where(u => !u.Fail)
+                .SelectMany(u => u.Channels)
+                .Where(c => !c.Fail)
+                .First(c => c.ChannelSubscriberId == clientSource.ChannelSubscriberId).Payloads
+                .ToArray();
+            Assert.That(clientSource.ReceivedPayloads.ToArray(), Is.EqualTo(payload));
+        }
     }
 }
