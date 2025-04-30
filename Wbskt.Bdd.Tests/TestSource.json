@@ -1,0 +1,127 @@
+{
+  "Users": [
+    {
+      "UserName": "{TestUser0.guid}",
+      "EmailId": "{TestUser0.guid}@wbskt.com",
+      "Password": "{TestUser0.guid}#pwd",
+      "Channels": [
+        {
+          "ChannelName": "{U0Ch0.guid}",
+          "ChannelSecret": "{TestUser0.guid}this is a tree"
+        },
+        {
+          "ChannelName": "{U0Ch1.guid}",
+          "ChannelSecret": "{TestUser0.guid}this is a box"
+        },
+        {
+          "ChannelName": "{U0Ch2.guid}",
+          "ChannelSecret": "{TestUser0.guid}this is a cat"
+        },
+        {
+          "ChannelName": "{U0Ch3.guid}",
+          "ChannelSecret": "{TestUser0.guid}this is a key"
+        },
+        {
+          "ChannelName": "{U0Ch4.guid}",
+          "ChannelSecret": "{TestUser0.guid}this is a phone"
+        },
+        {
+          "Fail": true,
+          "Reason": "Channel name already exists",
+          "ChannelName": "{U0Ch4.guid}",
+          "ChannelSecret": "{TestUser0.guid}this is a green"
+        }
+      ]
+    },
+    {
+      "UserName": "{TestUser1.guid}",
+      "EmailId": "{TestUser1.guid}@wbskt.com",
+      "Password": "{TestUser1.guid}#pwd",
+      "Channels": [
+        {
+          "ChannelName": "{U1Ch0.guid}",
+          "ChannelSecret": "{TestUser1.guid}this is a tree"
+        },
+        {
+          "Fail": true,
+          "Reason": "Channel name for the same user already exists",
+          "ChannelName": "{U1Ch0.guid}",
+          "ChannelSecret": "{TestUser1.guid}this is a ssssss"
+        },
+        {
+          "ChannelName": "{U0Ch0.guid}",
+          "ChannelSecret": "{TestUser1.guid}this is a basdfox"
+        }
+      ]
+    },
+    {
+      "UserName": "{TestUser2.guid}",
+      "EmailId": "{TestUser2.guid}@wbskt.com",
+      "Password": "{TestUser2.guid}#pwd",
+      "Channels": [
+        {
+          "ChannelName": "{U2Ch0.guid}",
+          "ChannelSecret": "{TestUser2.guid}this is a tree"
+        }
+      ]
+    },
+    {
+      "UserName": "{TestUser3.guid}",
+      "EmailId": "{TestUser3.guid}@wbskt.com",
+      "Password": "{TestUser3.guid}#pwd",
+      "Channels": [
+        {
+          "ChannelName": "{U3Ch0.guid}",
+          "ChannelSecret": "{TestUser3.guid}this is a tree"
+        }
+      ]
+    },
+    {
+      "UserName": "{TestUser4.guid}",
+      "EmailId": "{TestUser4.guid}@wbskt.com",
+      "Password": "{TestUser4.guid}#pwd",
+      "Channels": [
+        {
+          "ChannelName": "{U4Ch0.guid}",
+          "ChannelSecret": "{TestUser4.guid}this is a tree"
+        }
+      ]
+    },
+    {
+      "Fail": true,
+      "Reason": "Same username and emailId already exists",
+      "UserName": "{TestUser4.guid}",
+      "EmailId": "{TestUser4.guid}@wbskt.com",
+      "Password": "{TestUser4.guid}#pwd",
+      "Channels": []
+    }
+  ],
+  "Clients": [
+    {
+      "ClientName": "{bob.guid}",
+      "ChannelSecret": "{TestUser3.guid}this is a tree",
+      "ChannelName": "{U3Ch0.guid}"
+    },
+    {
+      "Fail": true,
+      "Reason": "Channel name and secret does not match",
+      "ClientName": "{alice.guid}",
+      "ChannelSecret": "{TestUser3.guid}this is a tree",
+      "ChannelName": "{U2Ch0.guid}"
+    },
+    {
+      "ClientName": "{alice.guid}",
+      "ChannelSecret": "{TestUser3.guid}this is a tree",
+      "ChannelName": "{U3Ch0.guid}",
+      "ClientUniqueId": "{aliceclient.GUID}"
+    },
+    {
+      "Fail": true,
+      "Reason": "Same unique id",
+      "ClientName": "{alice.guid}",
+      "ChannelSecret": "{TestUser3.guid}this is a tree",
+      "ChannelName": "{U3Ch0.guid}",
+      "ClientUniqueId": "{aliceclient.GUID}"
+    }
+  ]
+}

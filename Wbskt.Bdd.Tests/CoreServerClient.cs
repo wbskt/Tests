@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using Wbskt.Common.Contracts;
 
 namespace Wbskt.Bdd.Tests;
@@ -11,9 +12,14 @@ public class CoreServerClient
     private const string Channels = "api/channels";
     private const string Dispatch = "api/channels/{0}/dispatch";
 
-    public CoreServerClient(string baseAddress)
+    public CoreServerClient(string baseAddress = "https://wbskt.com")
     {
         _client.BaseAddress = new Uri(baseAddress);
+    }
+
+    public void SetUserToken(string token)
+    {
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
     }
 
     public async Task<ApiResult<string>> RegisterUser(UserRegistrationRequest request)

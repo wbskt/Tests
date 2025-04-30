@@ -20,6 +20,12 @@
     <ItemGroup>
         <Using Include="NUnit.Framework"/>
     </ItemGroup>
+  
+    <ItemGroup>
+      <None Update="TestSource.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\Clients\Wbskt.Client.CSharp\Wbskt.Client\Wbskt.Client.csproj" />
