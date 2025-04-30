@@ -2,6 +2,16 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wbskt.Bdd.Tests", "Wbskt.Bdd.Tests\Wbskt.Bdd.Tests.csproj", "{BCFE8F78-0F40-49A8-8BB8-3F0D81766C1D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{592D6050-E71D-4B02-805B-A0F9A74DBCF9}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Packages.props = Directory.Packages.props
+		nuget.config = nuget.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wbskt.Common", "..\Core\Wbskt.Common\Wbskt.Common.csproj", "{E68159B4-0AC6-4BA3-AB2B-1A9F1A414B2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wbskt.Client", "..\Clients\Wbskt.Client.CSharp\Wbskt.Client\Wbskt.Client.csproj", "{DC3F8617-A351-45C1-8502-3C7D06012A55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +22,13 @@ Global
 		{BCFE8F78-0F40-49A8-8BB8-3F0D81766C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCFE8F78-0F40-49A8-8BB8-3F0D81766C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCFE8F78-0F40-49A8-8BB8-3F0D81766C1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E68159B4-0AC6-4BA3-AB2B-1A9F1A414B2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E68159B4-0AC6-4BA3-AB2B-1A9F1A414B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E68159B4-0AC6-4BA3-AB2B-1A9F1A414B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E68159B4-0AC6-4BA3-AB2B-1A9F1A414B2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC3F8617-A351-45C1-8502-3C7D06012A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC3F8617-A351-45C1-8502-3C7D06012A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC3F8617-A351-45C1-8502-3C7D06012A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC3F8617-A351-45C1-8502-3C7D06012A55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
