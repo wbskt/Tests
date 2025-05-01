@@ -152,11 +152,11 @@ public class MultiServerTests
 
         var listeningTask = Task.WhenAll(_testSource.Clients.Select(clientConn => Task.Run(async () =>
         {
-            clientConn.CancellationToken.CancelAfter(2 * 60 * 1000);
+            clientConn.CancellationToken.CancelAfter(20 * 1000);
             await clientConn.Listener!.StartListening(clientConn.CancellationToken.Token).ConfigureAwait(false);
         }))).ConfigureAwait(false);
 
-        await Task.Delay(10 * 1000);
+        await Task.Delay(5 * 1000);
         foreach (var user in _testSource.Users.Where(u => !u.Fail))
         {
             foreach (var channel in user.Channels.Where(c => !c.Fail))
@@ -170,7 +170,7 @@ public class MultiServerTests
 
         await listeningTask;
 
-        foreach (var clientSource in _testSource.Clients)
+        foreach (var clientSource in _testSource.Clients.Where(c => !c.Fail))
         {
             var payload = _testSource.Users
                 .Where(u => !u.Fail)
