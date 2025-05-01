@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wbskt.Common", "..\Core\Wbskt.Common\Wbskt.Common.csproj", "{E68159B4-0AC6-4BA3-AB2B-1A9F1A414B2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wbskt.Client", "..\Clients\Wbskt.Client.CSharp\Wbskt.Client\Wbskt.Client.csproj", "{DC3F8617-A351-45C1-8502-3C7D06012A55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wbskt.Client", "..\Client.CSharp\Wbskt.Client\Wbskt.Client.csproj", "{DC3F8617-A351-45C1-8502-3C7D06012A55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

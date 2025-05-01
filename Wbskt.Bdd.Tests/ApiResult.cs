@@ -8,7 +8,7 @@ public class ApiResult<T>
 {
     public HttpStatusCode StatusCode { get; set; }
     public bool IsSuccessStatusCode { get; set; }
-    public string ErrorMessage { get; set; }
+    public string ErrorMessage { get; set; } = string.Empty;
 
     public T Value { get; set; }
 }

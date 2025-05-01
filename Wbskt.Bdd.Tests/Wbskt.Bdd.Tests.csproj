@@ -29,7 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Clients\Wbskt.Client.CSharp\Wbskt.Client\Wbskt.Client.csproj" />
+      <ProjectReference Include="..\..\Client.CSharp\Wbskt.Client\Wbskt.Client.csproj" />
       <ProjectReference Include="..\..\Core\Wbskt.Common\Wbskt.Common.csproj" />
     </ItemGroup>
 
