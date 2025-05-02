@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using Wbskt.Client;
+using Wbskt.Common.Contracts;
 
 namespace Wbskt.Bdd.Tests.ContractWrappers;
 

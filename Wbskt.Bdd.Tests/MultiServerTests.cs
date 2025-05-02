@@ -5,16 +5,15 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Wbskt.Bdd.Tests.ContractWrappers;
 using Wbskt.Client;
+using Wbskt.Client.Configurations;
 using Wbskt.Common.Contracts;
-using ChannelDetails = Wbskt.Common.Contracts.ChannelDetails;
-using ClientPayload = Wbskt.Common.Contracts.ClientPayload;
 
 namespace Wbskt.Bdd.Tests;
 
 public class MultiServerTests
 {
     private CoreServerClient _commonClient;
-    private ConcurrentBag<ChannelDetails> _channelDetails = [];
+    private ConcurrentBag<Common.Contracts.ChannelDetails> _channelDetails = [];
     private TestSource _testSource;
 
     [OneTimeSetUp]
@@ -119,7 +118,7 @@ public class MultiServerTests
             clientSource.ChannelSubscriberId = channelDict.TryGetValue(clientSource.ChannelName, out var cd) ? cd.ChannelSubscriberId : Guid.NewGuid();
             var wbsktConfigurationCustom = new WbsktConfigurationCustom
             {
-                ChannelDetails = new Client.ChannelDetails
+                ChannelDetails = new Client.Configurations.ChannelDetails()
                 {
                     Secret = clientSource.ChannelSecret,
                     SubscriberId = clientSource.ChannelSubscriberId
@@ -129,7 +128,7 @@ public class MultiServerTests
                     Name = clientSource.ClientName,
                     UniqueId = clientSource.ClientUniqueId
                 },
-                CoreServerAddress = new HostString("wbskt.com")
+                WbsktServerAddress = new HostString("wbskt.com")
             };
 
             var payload = _testSource.Users
@@ -140,7 +139,7 @@ public class MultiServerTests
                 .ToList();
 
             clientSource.Listener = new WbsktListener(wbsktConfigurationCustom, new Mock<ILogger<WbsktListener>>().Object);
-            clientSource.Listener!.ReceivedPayload += clientPayload =>
+            clientSource.Listener!.ReceivedPayloadEvent += clientPayload =>
             {
                 clientSource.ReceivedPayloads.Add(clientPayload.Data);
                 if (payload.Count == clientSource.ReceivedPayloads.Count)
@@ -153,7 +152,7 @@ public class MultiServerTests
         var listeningTask = Task.WhenAll(_testSource.Clients.Select(clientConn => Task.Run(async () =>
         {
             clientConn.CancellationToken.CancelAfter(20 * 1000);
-            await clientConn.Listener!.StartListening(clientConn.CancellationToken.Token).ConfigureAwait(false);
+            await clientConn.Listener!.StartListeningAsync(clientConn.CancellationToken.Token).ConfigureAwait(false);
         }))).ConfigureAwait(false);
 
         await Task.Delay(5 * 1000);
