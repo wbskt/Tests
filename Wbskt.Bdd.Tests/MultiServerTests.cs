@@ -128,7 +128,7 @@ public class MultiServerTests
                     Name = clientSource.ClientName,
                     UniqueId = clientSource.ClientUniqueId
                 },
-                WbsktServerAddress = new HostString("wbskt.com")
+                WbsktServerAddress = "wbskt.com"
             };
 
             var payload = _testSource.Users
