@@ -17,12 +17,13 @@
         <PackageReference Include="NUnit" />
         <PackageReference Include="NUnit.Analyzers" />
         <PackageReference Include="NUnit3TestAdapter" />
+        <PackageReference Include="Wbskt.Client" />
     </ItemGroup>
 
     <ItemGroup>
         <Using Include="NUnit.Framework"/>
     </ItemGroup>
-  
+
     <ItemGroup>
       <None Update="TestSource.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -30,7 +31,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Client.CSharp\Wbskt.Client\Wbskt.Client.csproj" />
       <ProjectReference Include="..\..\Core\Wbskt.Common\Wbskt.Common.csproj" />
     </ItemGroup>
 
