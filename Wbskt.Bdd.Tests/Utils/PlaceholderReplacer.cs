@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Wbskt.Bdd.Tests;
+namespace Wbskt.Bdd.Tests.Utils;
 
 public static partial class PlaceholderReplacer
 {

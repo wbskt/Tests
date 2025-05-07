@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Wbskt.Bdd.Tests.ContractWrappers;
+using Wbskt.Bdd.Tests.Utils;
 using Wbskt.Client;
 using Wbskt.Client.Configurations;
 using Wbskt.Common.Contracts;
@@ -20,7 +21,7 @@ public class MultiServerTests
     public void Setup()
     {
         var json = File.ReadAllText("TestSource.json");
-        json = PlaceholderReplacer.ReplacePlaceholders(json);
+        json = Utils.PlaceholderReplacer.ReplacePlaceholders(json);
         _testSource = JsonSerializer.Deserialize<TestSource>(json) ?? new TestSource();
         foreach (var client in _testSource.Clients)
         {

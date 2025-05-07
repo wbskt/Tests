@@ -2,7 +2,7 @@
 using System.Net.Http.Json;
 using Wbskt.Common.Contracts;
 
-namespace Wbskt.Bdd.Tests;
+namespace Wbskt.Bdd.Tests.Utils;
 
 public class CoreServerClient
 {

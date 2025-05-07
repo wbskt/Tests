@@ -25,9 +25,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="TestSource.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      <None Update="TestSource.json" CopyToOutputDirectory="PreserveNewest" />
+      <None Update="UsersTests.json" CopyToOutputDirectory="PreserveNewest" />
+      <None Update="ChannelsTests.json" CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
 
     <ItemGroup>

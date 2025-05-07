@@ -1,0 +1,54 @@
+{
+  "Users": [
+    {
+      "UserName": "{TestUser1.guid}",
+      "EmailId": "{TestUser1.guid}@wbskt.com",
+      "Password": "{TestUser1.guid}#pwd"
+    },
+    {
+      "UserName": "{TestUser2.guid}",
+      "EmailId": "{TestUser2.guid}@wbskt.com",
+      "Password": "{TestUser2.guid}#pwd"
+    },
+    {
+      "UserName": "{TestUser3.guid}",
+      "EmailId": "{TestUser3.guid}@wbskt.com",
+      "Password": "{TestUser3.guid}#pwd"
+    },
+    {
+      "UserName": "{TestUser4.guid}",
+      "EmailId": "{TestUser4.guid}@wbskt.com",
+      "Password": "{TestUser4.guid}#pwd"
+    },
+    {
+      "UserName": "{TestUser5.guid}",
+      "EmailId": "{TestUser5.guid}@wbskt.com",
+      "Password": "{TestUser5.guid}#pwd"
+    },
+    {
+      "UserName": "{TestUser6.guid}",
+      "EmailId": "{TestUser6.guid}@wbskt.com",
+      "Password": "{TestUser6.guid}#pwd"
+    },
+    {
+      "UserName": "{TestUser7.guid}",
+      "EmailId": "{TestUser7.guid}@wbskt.com",
+      "Password": "{TestUser7.guid}#pwd"
+    },
+    {
+      "UserName": "{TestUser8.guid}",
+      "EmailId": "{TestUser8.guid}@wbskt.com",
+      "Password": "{TestUser8.guid}#pwd"
+    },
+    {
+      "UserName": "{TestUser9.guid}",
+      "EmailId": "{TestUser9.guid}@wbskt.com",
+      "Password": "{TestUser9.guid}#pwd"
+    },
+    {
+      "UserName": "{TestUser10.guid}",
+      "EmailId": "{TestUser10.guid}@wbskt.com",
+      "Password": "{TestUser10.guid}#pwd"
+    }
+  ]
+}
