@@ -25,9 +25,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Update="UserTests.json" CopyToOutputDirectory="PreserveNewest" />
       <None Update="TestSource.json" CopyToOutputDirectory="PreserveNewest" />
-      <None Update="UsersTests.json" CopyToOutputDirectory="PreserveNewest" />
-      <None Update="ChannelsTests.json" CopyToOutputDirectory="PreserveNewest" />
+      <None Update="ClientTests.json" CopyToOutputDirectory="PreserveNewest" />
+      <None Update="ChannelTests.json" CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
 
     <ItemGroup>

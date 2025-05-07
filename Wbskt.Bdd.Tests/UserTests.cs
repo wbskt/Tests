@@ -6,7 +6,7 @@ using Wbskt.Common.Contracts;
 
 namespace Wbskt.Bdd.Tests;
 
-public class UsersTests
+public class UserTests
 {
     private CoreServerClient _commonClient;
     private TestSource _testSource;
@@ -14,7 +14,7 @@ public class UsersTests
     [OneTimeSetUp]
     public void Setup()
     {
-        var json = File.ReadAllText($"{nameof(UsersTests)}.json");
+        var json = File.ReadAllText($"{nameof(UserTests)}.json");
         json = PlaceholderReplacer.ReplacePlaceholders(json);
         _testSource = JsonSerializer.Deserialize<TestSource>(json) ?? new TestSource();
         _commonClient = new CoreServerClient();

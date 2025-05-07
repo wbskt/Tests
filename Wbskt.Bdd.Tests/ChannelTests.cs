@@ -5,7 +5,7 @@ using Wbskt.Bdd.Tests.Utils;
 
 namespace Wbskt.Bdd.Tests;
 
-public class ChannelsTests
+public class ChannelTests
 {
     private CoreServerClient _commonClient;
     private TestSource _testSource;
@@ -13,7 +13,7 @@ public class ChannelsTests
     [OneTimeSetUp]
     public async Task Setup()
     {
-        var json = await File.ReadAllTextAsync($"{nameof(ChannelsTests)}.json");
+        var json = await File.ReadAllTextAsync($"{nameof(ChannelTests)}.json");
         json = PlaceholderReplacer.ReplacePlaceholders(json);
         _testSource = JsonSerializer.Deserialize<TestSource>(json) ?? new TestSource();
         _commonClient = new CoreServerClient();
