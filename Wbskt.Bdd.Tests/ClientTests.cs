@@ -26,5 +26,37 @@ public class ClientTests
             user.Token = result.Value ?? string.Empty;
             user.Client.SetUserToken(user.Token);
         })));
+
+        await Task.WhenAll(_testSource.Users.Select(user => Task.Run(async () =>
+        {
+            foreach (var channel in user.Channels)
+            {
+                var result = await user.Client.CreateChannel(channel);
+                Assert.That(result.IsSuccessStatusCode, Is.True);
+                Assert.That(result.Value?.ChannelName, Is.EqualTo(channel.ChannelName));
+                Assert.That(result.Value.ChannelSecret, Is.EqualTo(channel.ChannelSecret));
+                channel.ChannelSubscriberId = result.Value.ChannelSubscriberId;
+                channel.ChannelPublisherId = result.Value.ChannelPublisherId;
+            }
+        })));
+    }
+
+    [Test]
+    public async Task ClientConnectionTest()
+    {
+        var clients = _testSource.Users.SelectMany(u => u.Channels).SelectMany(c => c.GetClientsForChannel()).ToArray();
+
+        // await clients.First().StartListeningAsync(CancellationToken.None);
+        // connect all clients
+        var ct = new CancellationTokenSource();
+
+        Task.WaitAll(clients.Select(listener => listener.StartListeningAsync(ct.Token)).ToArray(), 10 * 1000);
+
+        foreach (var listener in clients)
+        {
+            Assert.That(listener.IsConnected, Is.True);
+        }
+
+        await ct.CancelAsync();
     }
 }

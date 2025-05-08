@@ -8,11 +8,13 @@
         {
           "_comment": "This is an edge case, channel name is same for U1 and U5. This should create 2 different channels without errors",
           "ChannelName": "{U1U5CH1.guid}",
-          "ChannelSecret": "{U1U5CH1.guid}.this is v.big secret"
+          "ChannelSecret": "{U1U5CH1.guid}.this is v.big secret",
+          "NumberOfClients": 2
         },
         {
           "ChannelName": "{U1CH1.guid}",
-          "ChannelSecret": "{U1CH1.guid}.this is v.big secret"
+          "ChannelSecret": "{U1CH1.guid}.this is v.big secret",
+          "NumberOfClients": 5
         }
       ]
     },
@@ -23,11 +25,13 @@
       "Channels": [
         {
           "ChannelName": "{U2CH1.guid}",
-          "ChannelSecret": "{U1CH1.guid}.this is v.big secret"
+          "ChannelSecret": "{U1CH1.guid}.this is v.big secret",
+          "NumberOfClients": 6
         },
         {
           "ChannelName": "{U2CH2.guid}",
-          "ChannelSecret": "{U2CH2.guid}.this is v.big secret"
+          "ChannelSecret": "{U2CH2.guid}.this is v.big secret",
+          "NumberOfClients": 7
         }
       ]
     },
@@ -38,15 +42,18 @@
       "Channels": [
         {
           "ChannelName": "{U3CH1.guid}",
-          "ChannelSecret": "{U3CH1.guid}.this is v.big secret"
+          "ChannelSecret": "{U3CH1.guid}.this is v.big secret",
+          "NumberOfClients": 10
         },
         {
           "ChannelName": "{U3CH2.guid}",
-          "ChannelSecret": "{U3CH2.guid}.this is v.big secret"
+          "ChannelSecret": "{U3CH2.guid}.this is v.big secret",
+          "NumberOfClients": 15
         },
         {
           "ChannelName": "{U3CH3.guid}",
-          "ChannelSecret": "{U3CH3.guid}.this is v.big secret"
+          "ChannelSecret": "{U3CH3.guid}.this is v.big secret",
+          "NumberOfClients": 9
         }
       ]
     },
@@ -57,19 +64,23 @@
       "Channels": [
         {
           "ChannelName": "{U4CH1.guid}",
-          "ChannelSecret": "{U4CH1.guid}.this is v.big secret"
+          "ChannelSecret": "{U4CH1.guid}.this is v.big secret",
+          "NumberOfClients": 3
         },
         {
           "ChannelName": "{U4CH2.guid}",
-          "ChannelSecret": "{U4CH2.guid}.this is v.big secret"
+          "ChannelSecret": "{U4CH2.guid}.this is v.big secret",
+          "NumberOfClients": 5
         },
         {
           "ChannelName": "{U4CH3.guid}",
-          "ChannelSecret": "{U4CH3.guid}.this is v.big secret"
+          "ChannelSecret": "{U4CH3.guid}.this is v.big secret",
+          "NumberOfClients": 2
         },
         {
           "ChannelName": "{U4CH4.guid}",
-          "ChannelSecret": "{U4CH4.guid}.this is v.big secret"
+          "ChannelSecret": "{U4CH4.guid}.this is v.big secret",
+          "NumberOfClients": 4
         }
       ]
     },
@@ -80,30 +91,35 @@
       "Channels": [
         {
           "ChannelName": "{U1U5CH1.guid}",
-          "ChannelSecret": "{U1U5CH1.guid}.this is v.big secret"
+          "ChannelSecret": "{U1U5CH1.guid}.this is v.big secret",
+          "NumberOfClients": 10
         },
         {
           "ChannelName": "{U5CH1.guid}",
-          "ChannelSecret": "{U5CH1.guid}.this is v.big secret"
+          "ChannelSecret": "{U5CH1.guid}.this is v.big secret",
+          "NumberOfClients": 22
         },
         {
           "ChannelName": "{U5CH2.guid}",
-          "ChannelSecret": "{U5CH2.guid}.this is v.big secret"
+          "ChannelSecret": "{U5CH2.guid}.this is v.big secret",
+          "NumberOfClients": 4
         },
         {
           "ChannelName": "{U5CH3.guid}",
-          "ChannelSecret": "{U5CH3.guid}.this is v.big secret"
+          "ChannelSecret": "{U5CH3.guid}.this is v.big secret",
+          "NumberOfClients": 5
         },
         {
           "ChannelName": "{U5CH4.guid}",
-          "ChannelSecret": "{U5CH4.guid}.this is v.big secret"
+          "ChannelSecret": "{U5CH4.guid}.this is v.big secret",
+          "NumberOfClients": 3
         },
         {
           "ChannelName": "{U5CH5.guid}",
-          "ChannelSecret": "{U5CH5.guid}.this is v.big secret"
+          "ChannelSecret": "{U5CH5.guid}.this is v.big secret",
+          "NumberOfClients": 5
         }
       ]
     }
-  ],
-  "Clients": []
+  ]
 }
