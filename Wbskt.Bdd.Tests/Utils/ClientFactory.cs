@@ -23,7 +23,7 @@ public static class ClientFactory
                     Name = $"cli.{i}.--.{Guid.NewGuid()}",
                     UniqueId = Guid.NewGuid()
                 },
-                WbsktServerAddress = "localhost:5070"
+                WbsktServerAddress = Constants.WbsktServerAddress
             };
 
             clients.Add(new WbsktListener(config, null));
