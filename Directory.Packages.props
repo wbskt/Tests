@@ -9,6 +9,6 @@
     <PackageVersion Include="NUnit" Version="3.14.0" />
     <PackageVersion Include="NUnit.Analyzers" Version="3.9.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
-    <PackageVersion Include="Wbskt.Client" Version="0.0.3" />
+    <PackageVersion Include="Wbskt.Client" Version="0.0.4" />
   </ItemGroup>
 </Project>
