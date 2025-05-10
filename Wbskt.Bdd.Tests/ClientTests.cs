@@ -46,17 +46,17 @@ public class ClientTests
     {
         var clients = _testSource.Users.SelectMany(u => u.Channels).SelectMany(c => c.GetClientsForChannel()).ToArray();
 
-        // await clients.First().StartListeningAsync(CancellationToken.None);
-        // connect all clients
         var ct = new CancellationTokenSource();
 
-        Task.WaitAll(clients.Select(listener => listener.StartListeningAsync(ct.Token)).ToArray(), 10 * 1000);
+        Task.WaitAll(clients.Select(listener => listener.StartListeningAsync(ct.Token)).ToArray(), 1 * 60 * 1000);
 
+        var count = 0;
         foreach (var listener in clients)
         {
-            Assert.That(listener.IsConnected, Is.True);
+            count++;
+            Assert.That(listener.IsConnected, Is.True, message: $"count is {count}");
         }
 
-        await ct.CancelAsync();
+        Task.WaitAll(clients.Select(listener => listener.StopListeningAsync()).ToArray(), 10 * 1000);
     }
 }

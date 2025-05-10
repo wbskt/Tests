@@ -12,7 +12,7 @@ public class CoreServerClient
     private const string Channels = "api/channels";
     private const string Dispatch = "api/channels/{0}/dispatch";
 
-    public CoreServerClient(string baseAddress = $"http://{Constants.WbsktServerAddress}")
+    public CoreServerClient(string baseAddress = $"https://{Constants.WbsktServerAddress}")
     {
         _client.BaseAddress = new Uri(baseAddress);
     }

@@ -48,12 +48,12 @@
         {
           "ChannelName": "{U3CH2.guid}",
           "ChannelSecret": "{U3CH2.guid}.this is v.big secret",
-          "NumberOfClients": 15
+          "NumberOfClients": 100
         },
         {
           "ChannelName": "{U3CH3.guid}",
           "ChannelSecret": "{U3CH3.guid}.this is v.big secret",
-          "NumberOfClients": 9
+          "NumberOfClients": 200
         }
       ]
     },
@@ -65,7 +65,7 @@
         {
           "ChannelName": "{U4CH1.guid}",
           "ChannelSecret": "{U4CH1.guid}.this is v.big secret",
-          "NumberOfClients": 3
+          "NumberOfClients": 200
         },
         {
           "ChannelName": "{U4CH2.guid}",
@@ -75,12 +75,12 @@
         {
           "ChannelName": "{U4CH3.guid}",
           "ChannelSecret": "{U4CH3.guid}.this is v.big secret",
-          "NumberOfClients": 2
+          "NumberOfClients": 200
         },
         {
           "ChannelName": "{U4CH4.guid}",
           "ChannelSecret": "{U4CH4.guid}.this is v.big secret",
-          "NumberOfClients": 4
+          "NumberOfClients": 400
         }
       ]
     },
@@ -102,22 +102,22 @@
         {
           "ChannelName": "{U5CH2.guid}",
           "ChannelSecret": "{U5CH2.guid}.this is v.big secret",
-          "NumberOfClients": 4
+          "NumberOfClients": 400
         },
         {
           "ChannelName": "{U5CH3.guid}",
           "ChannelSecret": "{U5CH3.guid}.this is v.big secret",
-          "NumberOfClients": 5
+          "NumberOfClients": 500
         },
         {
           "ChannelName": "{U5CH4.guid}",
           "ChannelSecret": "{U5CH4.guid}.this is v.big secret",
-          "NumberOfClients": 3
+          "NumberOfClients": 300
         },
         {
           "ChannelName": "{U5CH5.guid}",
           "ChannelSecret": "{U5CH5.guid}.this is v.big secret",
-          "NumberOfClients": 5
+          "NumberOfClients": 50
         }
       ]
     }
