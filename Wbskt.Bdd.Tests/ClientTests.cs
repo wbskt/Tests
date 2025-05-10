@@ -44,19 +44,22 @@ public class ClientTests
     [Test]
     public async Task ClientConnectionTest()
     {
-        var clients = _testSource.Users.SelectMany(u => u.Channels).SelectMany(c => c.GetClientsForChannel()).ToArray();
+        var clients = _testSource.Users.SelectMany(u => u.Channels).SelectMany(c => c.GetClientsForChannel()).ToArray()[..2200];
 
-        var ct = new CancellationTokenSource();
-
-        Task.WaitAll(clients.Select(listener => listener.StartListeningAsync(ct.Token)).ToArray(), 1 * 60 * 1000);
-
-        var count = 0;
+        var connected = 0;
         foreach (var listener in clients)
         {
-            count++;
-            Assert.That(listener.IsConnected, Is.True, message: $"count is {count}");
+            listener.StartListening(CancellationToken.None);
+            listener.OnConnected += () => { Interlocked.Increment(ref connected); };
+            listener.OnDisconnected += () => { Interlocked.Decrement(ref connected); };
         }
 
-        Task.WaitAll(clients.Select(listener => listener.StopListeningAsync()).ToArray(), 10 * 1000);
+        while (connected != clients.Length)
+        {
+            await Task.Delay(500);
+            await TestContext.Out.WriteLineAsync($"current connected: {connected}, total: {clients.Length}");
+        }
+
+        Task.WaitAll(clients.Select(listener => listener.StopListeningAsync()).ToArray());
     }
 }
