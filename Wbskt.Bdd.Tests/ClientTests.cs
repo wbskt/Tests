@@ -44,7 +44,7 @@ public class ClientTests
     [Test]
     public async Task ClientConnectionTest()
     {
-        var clients = _testSource.Users.SelectMany(u => u.Channels).SelectMany(c => c.GetClientsForChannel()).ToArray()[..2200];
+        var clients = _testSource.Users.SelectMany(u => u.Channels).SelectMany(c => c.GetClientsForChannel()).ToArray();
 
         var connected = 0;
         foreach (var listener in clients)
@@ -60,6 +60,6 @@ public class ClientTests
             await TestContext.Out.WriteLineAsync($"current connected: {connected}, total: {clients.Length}");
         }
 
-        Task.WaitAll(clients.Select(listener => listener.StopListeningAsync()).ToArray());
+        await Task.WhenAll(clients.Select(listener => listener.StopListeningAsync()));
     }
 }
